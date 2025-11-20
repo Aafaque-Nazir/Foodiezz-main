@@ -5,30 +5,36 @@ import Menu from '../pages/Menu';
 import Reviews from '../pages/Reviews';
 import Contact from '../pages/Contact';
 import Navbar from './components/Navbar';
-import TQ from '../pages/TQ';
-import { Route , Routes } from 'react-router-dom';
+import Footer from './components/Footer';
+import ThankYou from '../pages/TQ'; // Changed TQ to ThankYou to match route usage
+import { Route, Routes } from 'react-router-dom';
 
+
+import { CartProvider } from './context/CartContext';
+import FloatingCartBtn from './components/FloatingCartBtn';
+import CartSidebar from './components/CartSidebar';
 
 function App() {
   return (
-    <>
-      <Navbar />
-
-        <main className="pt-16 lg:pt-12">
+    <CartProvider>
+      <div className="flex flex-col min-h-screen bg-black text-white">
+        <Navbar />
+        <main className="flex-grow pt-[80px]">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/thank-you" element={<TQ />} />
+            <Route path="/thank-you" element={<ThankYou />} />
           </Routes>
         </main>
-
-
-    </>
-  )
+        <Footer />
+        <FloatingCartBtn />
+        <CartSidebar />
+      </div>
+    </CartProvider>
+  );
 }
 
 export default App

@@ -1,272 +1,290 @@
-import { motion, useAnimation } from "framer-motion";
-import { FaWhatsapp, FaUtensils, FaStar, FaClock, FaCheckCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { FaWhatsapp, FaUtensils, FaStar, FaClock, FaCheckCircle, FaFire } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 
 const Home = () => {
   const bestsellers = [
-    { name: "Mayo Veg Cheese Grilled", image: "mayoveggie.jpg" },
-    { name: "Chicken Tandoori Cheese Grilled", image: "tandoori.jpg" },
-    { name: "Chicken Cheese Grilled", image: "chickencheese.jpg" },
+    { name: "Mayo Veg Cheese Grilled", image: "mayoveggie.jpg", price: "₹149", rating: "4.8" },
+    { name: "Chicken Tandoori Grilled", image: "tandoori.jpg", price: "₹199", rating: "4.9" },
+    { name: "Chicken Cheese Grilled", image: "chickencheese.jpg", price: "₹179", rating: "4.7" },
   ];
 
   const whatsappLink = "https://wa.me/919325629256?text=Hi%2C%20I%20want%20to%20order%20from%20Bread%20%26%20Bite!";
 
-  // Reusable fade-up animation
   const container = {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { staggerChildren: 0.1 }
     }
   };
 
   const item = {
     hidden: { y: 30, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } }
+    show: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
   };
 
   return (
     <>
       {/* Hero Section */}
-      <section id="home" className="relative bg-black text-white overflow-hidden pt-24 pb-20 px-6 md:px-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-yellow-400/5 to-transparent"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
-          <div className="lg:w-1/2 space-y-6">
-            <motion.h1
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+        {/* Background Elements */}
+        <div className="absolute inset-0 bg-black z-0">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-400/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-yellow-600/10 rounded-full blur-[120px] translate-y-1/3 -translate-x-1/3"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center w-full">
+          <div className="space-y-8 text-center lg:text-left">
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl md:text-5xl font-extrabold leading-tight"
+              transition={{ duration: 0.6 }}
             >
-              <span className="text-yellow-400">Bread & Bite</span> — Where Grilled Meets Delicious
-            </motion.h1>
+              <span className="inline-block py-1 px-3 rounded-full bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 text-sm font-bold tracking-wider mb-4">
+                🔥 THE BEST GRILLED SANDWICHES IN TOWN
+              </span>
+              <h1 className="text-5xl md:text-7xl font-extrabold leading-tight text-white">
+                Taste the <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-amber-600">
+                  Crunch & Melt
+                </span>
+              </h1>
+            </motion.div>
+
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-gray-300 leading-relaxed"
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
-              Freshly grilled, loaded with cheese, and made with love. Our signature sandwiches are crafted for those who crave flavor — not just food.
+              Experience the perfect blend of crispy bread, oozing cheese, and fresh fillings.
+              Made with love, served with passion.
             </motion.p>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row gap-4 mt-8"
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <motion.a
+              <a
                 href={whatsappLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(34, 197, 94, 0.6)" }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center justify-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-6 py-3.5 rounded-full shadow-lg"
+                className="btn-primary flex items-center justify-center gap-2 group"
               >
-                <FaWhatsapp className="text-xl" />
-                Order on WhatsApp
-              </motion.a>
-              <motion.button
-                whileHover={{ scale: 1.03, boxShadow: "0 10px 25px -5px rgba(250, 204, 21, 0.4)" }}
-                whileTap={{ scale: 0.98 }}
-                className="border border-yellow-400 text-yellow-400 font-medium px-6 py-3.5 rounded-full hover:bg-yellow-400 hover:text-black transition"
+                <FaWhatsapp className="text-xl group-hover:scale-110 transition-transform" />
+                <span>Order Now</span>
+              </a>
+              <NavLink
+                to="/menu"
+                className="btn-outline flex items-center justify-center gap-2 group"
               >
-                <NavLink to="/menu" className="block w-full h-full">See Full Menu</NavLink>
-              </motion.button>
+                <FaUtensils className="text-sm group-hover:scale-110 transition-transform" />
+                <span>View Menu</span>
+              </NavLink>
             </motion.div>
-          </div>
 
-          <div className="lg:w-1/2 relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5, type: "spring", stiffness: 100 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex items-center justify-center lg:justify-start gap-8 pt-4"
             >
-              <img
-                src="Hero.png"
-                alt="Delicious Grilled Sandwich"
-                className="w-full h-auto max-h-[500px] object-cover rounded-2xl shadow-2xl border-2 border-yellow-400/50"
-              />
-              <div className="absolute -top-4 -right-4 bg-yellow-400 text-black px-4 py-2 rounded-full text-sm font-bold shadow-lg">
-                🔥 Best Seller
+              <div className="flex -space-x-4">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-black bg-zinc-800 flex items-center justify-center text-xs text-white font-bold">
+                    {i === 4 ? "2k+" : <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full rounded-full" />}
+                  </div>
+                ))}
+              </div>
+              <div className="text-sm text-zinc-400">
+                <span className="text-yellow-400 font-bold">4.9/5</span> Rating<br />
+                from 2000+ happy customers
               </div>
             </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            transition={{ delay: 0.3, duration: 0.8, type: "spring" }}
+            className="relative"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+            <img
+              src="Hero.png"
+              alt="Delicious Sandwich"
+              className="relative w-full max-w-[600px] mx-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+            />
+
+            {/* Floating Badge */}
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="absolute bottom-10 -left-4 md:left-10 glass p-4 rounded-2xl flex items-center gap-3 animate-bounce-slow"
+            >
+              <div className="w-10 h-10 rounded-full bg-yellow-400 flex items-center justify-center text-black">
+                <FaFire />
+              </div>
+              <div>
+                <p className="text-xs text-zinc-400">Hot & Spicy</p>
+                <p className="text-sm font-bold text-white">Peri Peri Special</p>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={container}
-        className="bg-zinc-900 py-16 px-6 md:px-20"
-      >
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-          {[ 
-            { icon: <FaClock />, value: "40 Min", label: "Fast Delivery" },
-            { icon: <FaCheckCircle />, value: "100%", label: "Fresh Ingredients" },
-            { icon: <FaStar />, value: "4.9", label: "Customer Rating" }
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              variants={item}
-              whileHover={{ y: -8 }}
-              className="p-6 bg-black/80 backdrop-blur-sm rounded-xl shadow-md border border-zinc-800 hover:border-yellow-400/30 transition-all"
-            >
-              <div className="text-yellow-400 text-3xl mb-3">{stat.icon}</div>
-              <div className="text-3xl font-bold text-white">{stat.value}</div>
-              <div className="text-zinc-400">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* Best Sellers → Redirect to /menu */}
-      <section className="bg-black py-20 px-6 md:px-20">
-        <div className="max-w-6xl mx-auto text-center mb-12">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl font-bold text-yellow-400 mb-4"
-          >
-            Our Top Picks
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-zinc-400 max-w-xl mx-auto"
-          >
-            These aren’t just sandwiches — they’re experiences.
-          </motion.p>
-        </div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          variants={container}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto"
-        >
-          {bestsellers.map((item, index) => (
-            <motion.div
-              key={item.name}
-              variants={item}
-              whileHover={{ y: -12, scale: 1.02 }}
-              className="group bg-zinc-800/60 backdrop-blur-sm p-6 rounded-2xl shadow-xl border border-zinc-700 hover:border-yellow-400/30 transition-all duration-300 cursor-pointer overflow-hidden"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} // Optional: scroll to top before redirect
-            >
-              <NavLink to="/menu" className="block h-full">
-                <div className="relative mb-4">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-full h-48 object-cover rounded-xl group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className="absolute bottom-2 right-2 bg-gradient-to-r from-yellow-400 to-amber-500 text-black text-xs font-bold px-2.5 py-1 rounded-full shadow">
-                    🧀 Cheesy
-                  </div>
+      <section className="py-10 bg-zinc-950 border-y border-zinc-900">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { icon: <FaClock />, value: "30-45", label: "Mins Delivery" },
+              { icon: <FaCheckCircle />, value: "100%", label: "Fresh Food" },
+              { icon: <FaStar />, value: "4.9", label: "Top Rated" },
+              { icon: <FaUtensils />, value: "50+", label: "Varieties" }
+            ].map((stat, index) => (
+              <div key={index} className="flex flex-col items-center text-center group">
+                <div className="text-3xl text-zinc-600 group-hover:text-yellow-400 transition-colors mb-2">
+                  {stat.icon}
                 </div>
-                <h3 className="text-xl font-semibold text-yellow-300 mb-2">{item.name}</h3>
-                <p className="text-zinc-400 text-sm">
-                  Grilled to perfection with fresh flavors.
-                </p>
-              </NavLink>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Full Menu CTA */}
-        <div className="text-center mt-12">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block px-8 py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-black font-bold rounded-full shadow-lg hover:shadow-yellow-500/40"
-          >
-            <NavLink to="/menu" className="block">View Full Menu →</NavLink>
-          </motion.button>
+                <div className="text-2xl font-bold text-white">{stat.value}</div>
+                <div className="text-sm text-zinc-500">{stat.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <motion.section
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={container}
-        className="bg-zinc-900 py-16 px-6 md:px-20"
-      >
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-yellow-400 mb-4">What Our Customers Say</h2>
-          <p className="text-center text-zinc-400 mb-12">Real people. Real reviews. No bots.</p>
+      {/* Bestsellers Section */}
+      <section className="py-24 bg-black relative">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Our <span className="text-yellow-400">Best Sellers</span>
+            </h2>
+            <p className="text-zinc-400 max-w-2xl mx-auto">
+              Tried, tested, and loved by thousands. These are the sandwiches that put us on the map.
+            </p>
+          </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { name: "Rohan K.", text: "Ordered the Mayo Veg Cheese — it was so good I cried. Bhai, you’ve ruined other sandwiches for me.", location: "Delhi", orders: 3 },
-              { name: "Priya S.", text: "My office team orders every Friday. Fast delivery, hot food, and consistent quality. 10/10!", location: "Gurgaon", orders: 8 },
-              { name: "Arjun M.", text: "The Tandoori Chicken sandwich? Chef’s kiss. My go-to for late-night cravings.", location: "Noida", orders: 5 }
-            ].map((review, i) => (
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-3 gap-8"
+          >
+            {bestsellers.map((item, index) => (
               <motion.div
-                key={i}
+                key={index}
                 variants={item}
-                whileHover={{ y: -5 }}
-                className="bg-black/80 backdrop-blur-sm p-6 rounded-xl shadow-md border border-zinc-800 hover:border-yellow-400/20 transition"
+                className="glass-card rounded-2xl overflow-hidden group"
               >
-                <FaStar className="text-yellow-400 text-xl mb-3" />
-                <p className="text-sm text-zinc-300 italic mb-4">“{review.text}”</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-yellow-400 to-amber-500 flex items-center justify-center text-black font-bold">
-                    {review.name.charAt(0)}
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute top-4 right-4 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">
+                    BESTSELLER
                   </div>
-                  <div>
-                    <div className="font-semibold">{review.name}</div>
-                    <div className="text-xs text-zinc-500">{review.location} • {review.orders} Orders</div>
+                </div>
+                <div className="p-6">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">
+                      {item.name}
+                    </h3>
+                    <div className="flex items-center gap-1 text-yellow-400 text-sm font-bold">
+                      <FaStar /> {item.rating}
+                    </div>
+                  </div>
+                  <p className="text-zinc-400 text-sm mb-6">
+                    Loaded with premium cheese, fresh veggies, and our secret sauces.
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-2xl font-bold text-white">{item.price}</span>
+                    <NavLink
+                      to="/menu"
+                      className="px-4 py-2 bg-zinc-800 text-white rounded-lg text-sm font-medium hover:bg-yellow-400 hover:text-black transition-all"
+                    >
+                      Order Now
+                    </NavLink>
                   </div>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          <div className="text-center mt-12">
+            <NavLink to="/menu" className="btn-outline inline-flex items-center gap-2">
+              View Full Menu <FaUtensils />
+            </NavLink>
           </div>
         </div>
-      </motion.section>
+      </section>
 
-      {/* Offer Banner */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="bg-gradient-to-r from-yellow-400 to-amber-500 text-black py-6 px-6 text-center"
-      >
-        <p className="text-xl md:text-2xl font-bold">🔥 ₹30 OFF on Orders Above ₹299</p>
-        <p className="text-sm opacity-90">Order via WhatsApp | Limited Time Offer</p>
-      </motion.section>
+      {/* Testimonials */}
+      <section className="py-24 bg-zinc-900/50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+              Customer <span className="text-yellow-400">Love</span>
+            </h2>
+          </div>
 
-      {/* Final CTA */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="bg-black py-20 px-6 md:px-20 text-center"
-      >
-        <h2 className="text-3xl font-bold text-yellow-400 mb-4">Ready to Taste the Magic?</h2>
-        <p className="text-zinc-400 mb-8 max-w-xl mx-auto">
-          Skip the apps. Just WhatsApp us — we’ll handle the rest.
-        </p>
-        <motion.a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{ scale: 1.05, boxShadow: "0 15px 30px -10px rgba(34, 197, 94, 0.5)" }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold px-8 py-4 rounded-full shadow-xl"
-        >
-          <FaWhatsapp className="text-2xl" />
-          Chat on WhatsApp
-        </motion.a>
-      </motion.section>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { name: "Rohan K.", text: "Best sandwich I've ever had! The cheese pull is real.", location: "New Delhi" },
+              { name: "Priya S.", text: "Super fast delivery and the packaging keeps it crispy.", location: "Gurgaon" },
+              { name: "Amit M.", text: "My late night craving fix. Tandoori Grilled is a must try!", location: "Noida" }
+            ].map((review, i) => (
+              <div key={i} className="bg-zinc-900 p-8 rounded-2xl border border-zinc-800 relative">
+                <FaStar className="text-yellow-400 text-2xl mb-4" />
+                <p className="text-zinc-300 italic mb-6 text-lg">"{review.text}"</p>
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 flex items-center justify-center text-black font-bold text-xl">
+                    {review.name[0]}
+                  </div>
+                  <div>
+                    <h4 className="text-white font-bold">{review.name}</h4>
+                    <p className="text-zinc-500 text-sm">{review.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-5xl mx-auto bg-gradient-to-r from-yellow-400 to-amber-500 rounded-3xl p-12 text-center relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/food.png')] opacity-10"></div>
+          <div className="relative z-10">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-black mb-6">
+              Hungry? Let's Fix That.
+            </h2>
+            <p className="text-black/80 text-lg mb-8 max-w-2xl mx-auto font-medium">
+              Skip the waiting. Order directly on WhatsApp for the fastest delivery and exclusive offers.
+            </p>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-black text-white font-bold px-8 py-4 rounded-full hover:scale-105 transition-transform shadow-2xl"
+            >
+              <FaWhatsapp className="text-2xl" />
+              Order on WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
