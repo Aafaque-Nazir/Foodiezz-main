@@ -13,7 +13,7 @@ const CartSidebar = () => {
         cart.forEach((item) => {
             message += `• ${item.name} x ${item.quantity} - ₹${item.price * item.quantity}\n`;
         });
-        message += `\n*Total: ₹${cartTotal}*\n\nPlease confirm my order!`;
+        message += `\nSubtotal: ₹${cartTotal}\nDelivery Charge: ₹50\n*Grand Total: ₹${cartTotal + 50}*\n\nPlease confirm my order!`;
 
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/919325629256?text=${encodedMessage}`, '_blank');
@@ -92,9 +92,19 @@ const CartSidebar = () => {
                         {/* Footer */}
                         {cart.length > 0 && (
                             <div className="p-6 border-t border-zinc-800 bg-zinc-900">
-                                <div className="flex justify-between items-center mb-6">
-                                    <span className="text-zinc-400">Total Amount</span>
-                                    <span className="text-2xl font-bold text-white">₹{cartTotal}</span>
+                                <div className="space-y-3 mb-6">
+                                    <div className="flex justify-between items-center text-zinc-400">
+                                        <span>Subtotal</span>
+                                        <span>₹{cartTotal}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center text-zinc-400">
+                                        <span>Delivery Charge</span>
+                                        <span>₹{50}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center pt-3 border-t border-zinc-800">
+                                        <span className="text-lg font-bold text-white">Grand Total</span>
+                                        <span className="text-2xl font-bold text-yellow-400">₹{cartTotal + 50}</span>
+                                    </div>
                                 </div>
                                 <button
                                     onClick={handleCheckout}

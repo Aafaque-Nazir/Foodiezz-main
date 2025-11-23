@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaShoppingCart } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCart } from "../context/CartContext";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { toggleCart, cartCount } = useCart();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,40 +43,68 @@ function Navbar() {
         </NavLink>
 
         {/* DESKTOP MENU */}
-        <ul className="hidden lg:flex gap-8 text-sm font-medium tracking-wide">
-          {navLinks.map((text) => (
-            <li key={text} className="relative">
-              <NavLink
-                to={text === "Home" ? "/" : `/${text.toLowerCase()}`}
-                className={({ isActive }) =>
-                  `transition-all duration-300 relative py-1 hover:text-yellow-400 ${isActive ? "text-yellow-400" : "text-zinc-300"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {text}
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeLink"
-                        className="absolute left-0 -bottom-1 h-[2px] w-full bg-yellow-400 rounded-full"
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                      />
-                    )}
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden lg:flex items-center gap-8">
+          <ul className="flex gap-8 text-sm font-medium tracking-wide">
+            {navLinks.map((text) => (
+              <li key={text} className="relative">
+                <NavLink
+                  to={text === "Home" ? "/" : `/${text.toLowerCase()}`}
+                  className={({ isActive }) =>
+                    `transition-all duration-300 relative py-1 hover:text-yellow-400 ${isActive ? "text-yellow-400" : "text-zinc-300"
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {text}
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeLink"
+                          className="absolute left-0 -bottom-1 h-[2px] w-full bg-yellow-400 rounded-full"
+                          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                        />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-        {/* MOBILE TOGGLE */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden text-white hover:text-yellow-400 transition-colors p-2"
-        >
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
+          {/* CART ICON */}
+          <button
+            onClick={toggleCart}
+            className="relative text-white hover:text-yellow-400 transition-colors"
+          >
+            <FaShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-black">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </div>
+
+        {/* MOBILE TOGGLE & CART */}
+        <div className="lg:hidden flex items-center gap-4">
+          <button
+            onClick={toggleCart}
+            className="relative text-white hover:text-yellow-400 transition-colors"
+          >
+            <FaShoppingCart size={22} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-black">
+                {cartCount}
+              </span>
+            )}
+          </button>
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-white hover:text-yellow-400 transition-colors p-2"
+          >
+            {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* MOBILE MENU */}

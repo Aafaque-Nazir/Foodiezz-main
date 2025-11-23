@@ -1,13 +1,11 @@
 import { motion } from "framer-motion";
 import { FaWhatsapp, FaUtensils, FaStar, FaClock, FaCheckCircle, FaFire } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import SEO from "../src/components/SEO";
+import ImageWithLoader from "../src/components/ImageWithLoader";
+import { bestsellers } from "../data/Bestsellers";
 
 const Home = () => {
-  const bestsellers = [
-    { name: "Mayo Veg Cheese Grilled", image: "mayoveggie.jpg", price: "₹149", rating: "4.8" },
-    { name: "Chicken Tandoori Grilled", image: "tandoori.jpg", price: "₹199", rating: "4.9" },
-    { name: "Chicken Cheese Grilled", image: "chickencheese.jpg", price: "₹179", rating: "4.7" },
-  ];
 
   const whatsappLink = "https://wa.me/919325629256?text=Hi%2C%20I%20want%20to%20order%20from%20Bread%20%26%20Bite!";
 
@@ -26,6 +24,10 @@ const Home = () => {
 
   return (
     <>
+      <SEO
+        title="Home"
+        description="Welcome to Bread & Bite - The best grilled sandwiches in Taloja. Order fresh, cheesy, and delicious sandwiches online."
+      />
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
         {/* Background Elements */}
@@ -186,7 +188,7 @@ const Home = () => {
                 className="glass-card rounded-2xl overflow-hidden group"
               >
                 <div className="relative h-64 overflow-hidden">
-                  <img
+                  <ImageWithLoader
                     src={item.image}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"

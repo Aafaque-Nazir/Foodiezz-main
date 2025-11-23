@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const CartContext = createContext();
 
@@ -30,7 +31,7 @@ export const CartProvider = ({ children }) => {
             }
             return [...prevCart, { ...item, quantity: 1 }];
         });
-        setIsCartOpen(true); // Auto-open cart on add
+        toast.success(`${item.name} added to cart!`);
     };
 
     const removeFromCart = (id) => {
@@ -58,6 +59,8 @@ export const CartProvider = ({ children }) => {
 
     const cartTotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
+    const DELIVERY_CHARGE = 50;
+    const grandTotal = cartTotal + DELIVERY_CHARGE;
 
     const value = {
         cart,
@@ -69,6 +72,8 @@ export const CartProvider = ({ children }) => {
         toggleCart,
         cartTotal,
         cartCount,
+        DELIVERY_CHARGE,
+        grandTotal,
     };
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

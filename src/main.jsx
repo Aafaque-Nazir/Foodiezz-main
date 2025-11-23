@@ -7,10 +7,17 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
+import { HelmetProvider } from 'react-helmet-async';
+import { CartProvider } from './context/CartContext.jsx'; // Assuming CartProvider is from this path
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <BrowserRouter>
+      <HelmetProvider>
+        <CartProvider>
+          <App />
+        </CartProvider>
+      </HelmetProvider>
+    </BrowserRouter>
   </StrictMode>,
 )

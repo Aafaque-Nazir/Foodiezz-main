@@ -8,6 +8,8 @@ import menuItems from "../data/MenuItems";
 import { FaUtensils, FaLeaf, FaDrumstickBite, FaStar, FaChevronDown, FaSearch } from "react-icons/fa";
 import { Menu as HeadlessMenu } from "@headlessui/react";
 import ProductModal from '../src/components/ProductModal';
+import SEO from "../src/components/SEO";
+import ImageWithLoader from "../src/components/ImageWithLoader";
 
 // Animation variants
 const containerVariants = {
@@ -98,6 +100,10 @@ const Menu = () => {
 
   return (
     <section className="relative min-h-screen bg-black pt-24 pb-20 px-6 overflow-hidden">
+      <SEO
+        title="Menu"
+        description="Explore our wide range of grilled sandwiches, pizzas, and more. Fresh ingredients, premium taste."
+      />
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-yellow-400/5 rounded-full blur-[100px]"></div>
@@ -237,7 +243,7 @@ const Menu = () => {
                         className="relative h-56 overflow-hidden"
                         onClick={() => setSelectedItem(item)}
                       >
-                        <img
+                        <ImageWithLoader
                           src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
